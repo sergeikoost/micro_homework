@@ -116,3 +116,31 @@ HTTPS:
 <img width="1683" height="262" alt="micro_homework-1" src="https://github.com/user-attachments/assets/dba32228-1524-4a4c-86e9-8b12a2d74056" />
 
 
+```
+root@ubuntulearn:/home/devkub-homeworks/11-microservices-02-principles# curl -X POST -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib2IifQ.-51G5JQmpJleARHp8rIljBczPFanWT93d_N_7LQGUXU' -H 'Content-Type: octet/stream' --data-binary @1.jpg http://localhost/v1/upload
+{"filename":"e0de8db9-ad02-4eb9-a5d1-624a65581b8c.jpg"}
+```
+
+Загрузить картинку и проверить что она открывается:
+```
+curl localhost/image/e0de8db9-ad02-4eb9-a5d1-624a65581b8c.jpg > e0de8db9-ad02-4eb9-a5d1-624a65581b8c.jpg65581b8c.jpg 
+```
+
+```
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   153  100   153    0     0   152k      0 --:--:-- --:--:-- --:--:--  149k
+
+root@ubuntulearn:/home/devkub-homeworks/11-microservices-02-principles# ls -l 
+total 96
+-rw-r--r-- 1 root root 69846 Oct  8  2013 1.jpg
+-rw-rw-rw- 1 root root  1915 Aug 25 10:18 docker-compose.yaml
+-rw-r--r-- 1 root root   153 Aug 25 10:20 e0de8db9-ad02-4eb9-a5d1-624a65581b8c.jpg
+drwxr-xr-x 2 root root  4096 Aug 25 04:47 gateway
+-rw-r--r-- 1 root root  1719 Aug 25 03:31 readme.md
+drwxr-xr-x 3 root root  4096 Aug 25 04:26 security
+drwxr-xr-x 3 root root  4096 Aug 25 03:31 uploader
+```
+
+<img width="1678" height="376" alt="micro_homework-1 2" src="https://github.com/user-attachments/assets/4c654346-e684-4f01-b0d1-e839765f0a3f" />
+
