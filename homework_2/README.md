@@ -144,3 +144,57 @@ drwxr-xr-x 3 root root  4096 Aug 25 03:31 uploader
 
 <img width="1678" height="376" alt="micro_homework-1 2" src="https://github.com/user-attachments/assets/4c654346-e684-4f01-b0d1-e839765f0a3f" />
 
+
+### В задании не просят прикладывать проект целиком, просто приложу конфигурационный файл nginx.conf для наглядности:
+
+```
+worker_processes auto;
+events {
+    worker_connections 1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    upstream security {
+        server security:3000;
+    }
+    upstream uploader {
+        server uploader:3000;
+    }
+    upstream minio {
+        server storage:9000;
+    }
+    server {
+        listen       8080;
+        server_name  localhost;
+        location /v1/register {
+            proxy_pass http://security/v1/user;
+        }
+        location /v1/token {
+            proxy_pass http://security/v1/token;
+        }
+        location /v1/user {
+            proxy_pass http://security;
+            proxy_pass_request_headers on;
+            proxy_set_header Authorization $http_authorization;
+        }
+        location /v1/upload {
+            proxy_pass http://uploader/v1/upload;
+            proxy_pass_request_headers on;
+            proxy_set_header Authorization $http_authorization;
+        }
+        location ~ /v1/user/(.*) {
+            set $image $1;
+            proxy_pass http://minio/images/$image;
+            proxy_pass_request_headers on;
+            proxy_set_header Authorization $http_authorization;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+}
+```
