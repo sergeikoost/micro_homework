@@ -109,3 +109,10 @@ HTTPS:
 ---
 
 
+## Задача 3: API Gateway * (необязательная)
+
+#### Весь проект основывал на https://github.com/netology-code/devkub-homeworks/tree/main/11-microservices-02-principles допиливая под себя и решая проблемы с нерабочими контейнерами. Запуск и получения токена прошли успешно (хоть токен и вывелся немного коряво)
+
+<img width="1683" height="262" alt="micro_homework-1" src="https://github.com/user-attachments/assets/dba32228-1524-4a4c-86e9-8b12a2d74056" />
+
+
